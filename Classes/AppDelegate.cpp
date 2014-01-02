@@ -1,7 +1,6 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
-#include "cocos-ext.h"
-using namespace cocos2d::extension;
+#include "MainScene.h"
 
 USING_NS_CC;
 
@@ -27,14 +26,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     pDirector->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
-    //CCScene *pScene = HelloWorld::scene();
-    CCScene* pScene = CCScene::create();
-    CCNodeLoaderLibrary * ccNodeLoaderLibrary = CCNodeLoaderLibrary::newDefaultCCNodeLoaderLibrary();
-    CCBReader * ccbReader = new ::CCBReader(ccNodeLoaderLibrary);
-    ccbReader->autorelease();
-    
-    CCNode *  mainMenu = ccbReader->readNodeGraphFromFile("mainmenu.ccbi");
-    pScene->addChild(mainMenu);
+    CCScene *pScene = MainScene::scene();
     
     // run
     pDirector->runWithScene(pScene);
