@@ -13,8 +13,10 @@
 #include "cocos2d.h"
 #include "cocos-ext.h"
 
+
 using namespace cocos2d;
 using namespace cocos2d::extension;
+
 class MainScene:
 public CCLayer,
 public CCBMemberVariableAssigner,
@@ -31,7 +33,7 @@ public:
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject* pTarget, const char *pSelectorName);
     virtual SEL_CCControlHandler onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName);
     void single(CCObject* pSender, CCControlEvent pCCControlEvent);
-    
+
 };
 
 class MainSceneLayerLoader:public CCLayerLoader  {

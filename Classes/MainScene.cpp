@@ -7,6 +7,7 @@
 //
 
 #include "MainScene.h"
+#include "GameScene.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
@@ -28,7 +29,7 @@ CCScene* MainScene::scene()
     lib->registerCCNodeLoader("MainScene", MainSceneLayerLoader::loader());
     CCBReader *reader = new CCBReader(lib);
     CCNode *  mainMenu = reader->readNodeGraphFromFile("mainmenu.ccbi");
-    reader->release();
+    reader->autorelease();
     if (mainMenu!=NULL)
     {
         scene->addChild(mainMenu); //将node 添加到scene中
@@ -51,11 +52,12 @@ SEL_CCControlHandler MainScene::onResolveCCBCCControlSelector(cocos2d::CCObject 
 
 void MainScene::single(cocos2d::CCObject *pSender, CCControlEvent pCCControlEvent)
 {
-    CCLog("Button Pressed!");
+    //CCLog("Button Pressed!");
+    GameScene* scene =  new GameScene();
+    scene->scene();
 }
 
 bool MainScene::onAssignCCBMemberVariable(cocos2d::CCObject *pTarget, const char *pMemberVariableName, cocos2d::CCNode *pNode)
 {
-    
     return true;
 }
