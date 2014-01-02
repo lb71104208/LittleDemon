@@ -176,8 +176,8 @@
 								<string>Block</string>
 								<key>value</key>
 								<array>
-									<string></string>
-									<integer>0</integer>
+									<string>pause</string>
+									<integer>1</integer>
 								</array>
 							</dict>
 							<dict>
@@ -322,8 +322,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>329</real>
-							<real>204</real>
+							<real>326</real>
+							<real>139</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -334,8 +334,8 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.48011067509651184</real>
-							<real>0.455078125</real>
+							<real>0.5</real>
+							<real>0.5</real>
 						</array>
 					</dict>
 					<dict>
@@ -376,7 +376,7 @@
 			</dict>
 		</array>
 		<key>customClass</key>
-		<string></string>
+		<string>GameScene</string>
 		<key>displayName</key>
 		<string>CCLayer</string>
 		<key>memberVarAssignmentName</key>
@@ -489,9 +489,9 @@
 			<key>name</key>
 			<string>Default Timeline</string>
 			<key>offset</key>
-			<real>0.0</real>
+			<real>1.7885417938232422</real>
 			<key>position</key>
-			<real>2.5</real>
+			<real>4.3666667938232422</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>

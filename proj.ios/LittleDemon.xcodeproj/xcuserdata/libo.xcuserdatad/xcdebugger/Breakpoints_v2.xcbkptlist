@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../classes/GameScene.cpp"
-            timestampString = "410367796.370863"
+            timestampString = "410369769.399593"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "GameScene::onAssignCCBMemberVariable(cocos2d::CCObject *pTarget, const char *pMemberVariableName, cocos2d::CCNode *pNode)"
             landmarkType = "5">
             <Locations>
@@ -25,11 +25,11 @@
                   symbolName = "GameScene::onAssignCCBMemberVariable(cocos2d::CCObject*, char const*, cocos2d::CCNode*)"
                   moduleName = "LittleDemon"
                   urlString = "file:///Users/libo/Documents/cocos2d-x-2.2.1/projects/LittleDemon/classes/GameScene.cpp"
-                  timestampString = "410368601.418217"
+                  timestampString = "410370928.536854"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "42"
-                  endingLineNumber = "42"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
                   offsetFromSymbolStart = "26">
                </Location>
                <Location
@@ -39,11 +39,11 @@
                   symbolName = "GameScene::onAssignCCBMemberVariable(cocos2d::CCObject*, char const*, cocos2d::CCNode*)"
                   moduleName = "LittleDemon"
                   urlString = "file:///Users/libo/Documents/cocos2d-x-2.2.1/projects/LittleDemon/classes/GameScene.cpp"
-                  timestampString = "410368601.418382"
+                  timestampString = "410370928.53703"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "42"
-                  endingLineNumber = "42"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
                   offsetFromSymbolStart = "150">
                </Location>
             </Locations>
@@ -72,12 +72,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../classes/GameScene.cpp"
-            timestampString = "410368596.591469"
+            timestampString = "410370633.036337"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
-            landmarkName = "GameScene::onAssignCCBCustomProperty(cocos2d::CCObject *pTarget, const char *pMemberVariableName, cocos2d::extension::CCBValue *pCCBValue)"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "GameScene::update(float delta)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
