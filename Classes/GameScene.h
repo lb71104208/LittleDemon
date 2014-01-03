@@ -33,8 +33,14 @@ public:
     virtual void onNodeLoaded(CCNode * pNode, CCNodeLoader * pNodeLoader);
     void pause(CCObject* pSender, CCControlEvent pCCControlEvent);
     void update(float dt);
+    CCNode* LoadLayer(const char * pClassName, const char* pCCBFileName);
+    
+    CC_SYNTHESIZE(CCScene*, mScene, mScene);
 private:
     CCSprite* mBrickSprite;
+    CCLabelTTF* mMyLabel;
+    CCNode* mDemonAnimation;
+    CCNode* mGameLayer;
 };
 
 class GameSceneLayerLoader:public CCLayerLoader  {

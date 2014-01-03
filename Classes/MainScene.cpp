@@ -54,7 +54,8 @@ void MainScene::single(cocos2d::CCObject *pSender, CCControlEvent pCCControlEven
 {
     //CCLog("Button Pressed!");
     GameScene* scene =  new GameScene();
-    scene->scene();
+    CCDirector::sharedDirector()->replaceScene(scene->scene());
+
 }
 
 bool MainScene::onAssignCCBMemberVariable(cocos2d::CCObject *pTarget, const char *pMemberVariableName, cocos2d::CCNode *pNode)

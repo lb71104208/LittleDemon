@@ -9,60 +9,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../Classes/MainScene.cpp"
-            timestampString = "410342373.029225"
+            filePath = "../classes/GameScene.cpp"
+            timestampString = "410431677.690614"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "MainScene::single(cocos2d::CCObject *pSender, CCControlEvent pCCControlEvent)"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "GameScene::onNodeLoaded(CCNode * pNode, CCNodeLoader * pNodeLoader)"
             landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../Classes/MainScene.cpp"
-            timestampString = "410342355.55221"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "MainScene::onResolveCCBCCMenuItemSelector(cocos2d::CCObject *pTarget, const char *pSelectorName)"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MainScene::onResolveCCBCCMenuItemSelector(cocos2d::CCObject*, char const*)"
-                  moduleName = "LittleDemon"
-                  urlString = "file://localhost/Users/lb71104208/Documents/cocos2d-x-2.2.1/projects/LittleDemon/Classes/MainScene.cpp"
-                  timestampString = "410344505.165041"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "42"
-                  endingLineNumber = "42"
-                  offsetFromSymbolStart = "24">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "non-virtual thunk to MainScene::onResolveCCBCCMenuItemSelector(cocos2d::CCObject*, char const*)"
-                  moduleName = "LittleDemon"
-                  urlString = "file://localhost/Users/lb71104208/Documents/cocos2d-x-2.2.1/projects/LittleDemon/Classes/MainScene.cpp"
-                  timestampString = "410344505.165279"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "42"
-                  endingLineNumber = "42"
-                  offsetFromSymbolStart = "29">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

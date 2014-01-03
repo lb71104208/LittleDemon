@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D9D7A8A9-43BA-4683-8B5B-01DBA164EBB5</string>
+	<key>IDESourceControlProjectName</key>
+	<string>LittleDemon</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>FE470A26-00C1-4CC0-AF5F-73DDA81626D0</key>
+		<string>https://github.com/lb71104208/LittleDemon.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>proj.ios/LittleDemon.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>FE470A26-00C1-4CC0-AF5F-73DDA81626D0</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/lb71104208/LittleDemon.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>FE470A26-00C1-4CC0-AF5F-73DDA81626D0</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FE470A26-00C1-4CC0-AF5F-73DDA81626D0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>LittleDemon</string>
+		</dict>
+	</array>
+</dict>
+</plist>
