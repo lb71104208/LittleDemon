@@ -18,7 +18,8 @@ class GameScene:
 public CCLayer,
 public CCBMemberVariableAssigner,
 public CCNodeLoaderListener ,
-public CCBSelectorResolver{
+public CCBSelectorResolver
+{
     
 public:
     CCScene* scene();
@@ -31,16 +32,22 @@ public:
     virtual SEL_CCControlHandler onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName);
     //节点加载
     virtual void onNodeLoaded(CCNode * pNode, CCNodeLoader * pNodeLoader);
+    
+    virtual void ccTouchesBegan(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
+    
     void pause(CCObject* pSender, CCControlEvent pCCControlEvent);
     void update(float dt);
     CCNode* LoadLayer(const char * pClassName, const char* pCCBFileName);
-    
+    void jump();
+
     CC_SYNTHESIZE(CCScene*, mScene, mScene);
 private:
     CCSprite* mBrickSprite;
     CCLabelTTF* mMyLabel;
     CCNode* mDemonAnimation;
     CCNode* mGameLayer;
+    CCBReader* mReader;
+    CCBAnimationManager* mAnimationManager;
 };
 
 class GameSceneLayerLoader:public CCLayerLoader  {
@@ -49,6 +56,7 @@ public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(GameSceneLayerLoader, loader);
 protected:
     CCB_VIRTUAL_NEW_AUTORELEASE_CREATECCNODE_METHOD(GameScene);
+  
 };
 
 #endif /* defined(__LittleDemon__GameScene__) */

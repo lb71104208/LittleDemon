@@ -10,15 +10,22 @@
 USING_NS_CC;
 USING_NS_CC_EXT;
 
-GameScene::GameScene():mBrickSprite(NULL),mMyLabel(NULL),mDemonAnimation(NULL),mGameLayer(NULL)
+#define offsetY 20
+static int timeDelta = 0;
+
+GameScene::GameScene():mBrickSprite(NULL),mMyLabel(NULL),mDemonAnimation(NULL),mGameLayer(NULL),mReader(NULL),mAnimationManager(NULL)
 {
-   
+   setTouchEnabled( true );
 }
 
 GameScene::~GameScene()
 {
     CC_SAFE_RELEASE(mBrickSprite);
     CC_SAFE_RELEASE(mMyLabel);
+    CC_SAFE_RELEASE(mDemonAnimation);
+    CC_SAFE_RELEASE(mGameLayer);
+    CC_SAFE_RELEASE(mReader);
+    CC_SAFE_RELEASE(mAnimationManager);
 }
 
 CCScene* GameScene::scene()
@@ -39,13 +46,13 @@ CCNode* GameScene::LoadLayer(const char *pClassName, const char *pCCBFileName)
 {
     CCNodeLoaderLibrary *lib = CCNodeLoaderLibrary::newDefaultCCNodeLoaderLibrary();
     lib->registerCCNodeLoader(pClassName, GameSceneLayerLoader::loader());
-    CCBReader *reader = new CCBReader(lib);
-    reader->autorelease();
-
-    CCNode *  layer = reader->readNodeGraphFromFile(pCCBFileName);
- 
+    mReader = new CCBReader(lib);
+    mReader->autorelease();
+    CCNode *  layer = mReader->readNodeGraphFromFile(pCCBFileName);
+    
     return layer;
 }
+
 
 SEL_MenuHandler GameScene::onResolveCCBCCMenuItemSelector(cocos2d::CCObject *pTarget, const char *pSelectorName)
 {
@@ -76,9 +83,11 @@ void GameScene::onNodeLoaded(CCNode * pNode, CCNodeLoader * pNodeLoader)
     //加载角色动画layer
     mDemonAnimation = new CCNode(*LoadLayer("GameScene", "jump1.ccbi"));
     if (mDemonAnimation != NULL) {
-         mDemonAnimation->setPosition(CCPoint(mBrickSprite->getPositionX(),mBrickSprite->getPositionY()+mDemonAnimation->getContentSize().height/2));
-        //CCLog("%f %f",mScene->getPositionX(),mScene->getPositionY());
+
+        mDemonAnimation->setPosition(CCPoint(mBrickSprite->getPositionX(), mBrickSprite->getPositionY()+mBrickSprite->getContentSize().height/2+mDemonAnimation->getContentSize().height/2+offsetY));
+        //CCLog("%f %f",mBrickSprite->getPositionX(),mBrickSprite->getPositionY());
         this->addChild(mDemonAnimation);
+        mAnimationManager = mReader->getAnimationManager();
     }
     CCDirector::sharedDirector()->getScheduler()->scheduleUpdateForTarget(this,0,false);
 }
@@ -86,16 +95,29 @@ void GameScene::onNodeLoaded(CCNode * pNode, CCNodeLoader * pNodeLoader)
 void GameScene::update(float delta)
 {
     if (mBrickSprite!=NULL) {
-        mBrickSprite->setPosition(CCPoint(mBrickSprite->getPosition().x,mBrickSprite->getPosition().y-1));
+        //mBrickSprite->setPosition(CCPoint(mBrickSprite->getPosition().x,mBrickSprite->getPosition().y-1));
     }
     
     if (mDemonAnimation != NULL) {
-        mDemonAnimation->setPosition(CCPoint(mBrickSprite->getPositionX(),mBrickSprite->getPositionY()+mDemonAnimation->getContentSize().height/2));
-        //CCLog("%f %f",mScene->getPositionX(),mScene->getPositionY());
-        //this->addChild(mDemonAnimation);
+        mDemonAnimation->setPosition(CCPoint(mBrickSprite->getPositionX(), mBrickSprite->getPositionY()+mBrickSprite->getContentSize().height/2+mDemonAnimation->getContentSize().height/2+offsetY));
     }
-
     
+    timeDelta += delta;
+    if (timeDelta%3 == 0) {
+        //this->jump();
+    }
+}
+
+void GameScene::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent)
+{
+    this->jump();
+}
+
+void GameScene::jump()
+{
+    if (mAnimationManager!=NULL) {
+        mAnimationManager ->runAnimationsForSequenceNamed("jump");
+    }
 }
 
 void GameScene::pause(CCObject* pSender, CCControlEvent pCCControlEvent)
