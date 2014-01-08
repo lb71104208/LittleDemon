@@ -14,15 +14,18 @@ USING_NS_CC_EXT;
 #define JUMP_HEIGHT 200
 float offsetX = 0;
 
-GameScene::GameScene():mBrickSprite(NULL),mMyLabel(NULL),mDemon(NULL),mGameLayer(NULL),mDemonState(kDemonStanding),mCurrentHeight(0)
+GameScene::GameScene():mBrickSprite(NULL),mMyLabel(NULL),mDemon(NULL),mGameLayer(NULL),mReader(NULL),mDemonState(kDemonStanding),mCurrentHeight(0)
 {
-   
+   setTouchEnabled( true );
 }
 
 GameScene::~GameScene()
 {
     CC_SAFE_RELEASE(mBrickSprite);
     CC_SAFE_RELEASE(mMyLabel);
+    CC_SAFE_RELEASE(mGameLayer);
+    CC_SAFE_RELEASE(mReader);
+    //CC_SAFE_RELEASE(mDemon);
 }
 
 CCScene* GameScene::scene()
@@ -43,11 +46,10 @@ CCNode* GameScene::LoadLayer(const char *pClassName, const char *pCCBFileName)
 {
     CCNodeLoaderLibrary *lib = CCNodeLoaderLibrary::newDefaultCCNodeLoaderLibrary();
     lib->registerCCNodeLoader(pClassName, GameSceneLayerLoader::loader());
-    CCBReader *reader = new CCBReader(lib);
-    reader->autorelease();
-
-    CCNode *  layer = reader->readNodeGraphFromFile(pCCBFileName);
- 
+    mReader = new CCBReader(lib);
+    mReader->autorelease();
+    CCNode *  layer = mReader->readNodeGraphFromFile(pCCBFileName);
+    
     return layer;
 }
 
@@ -100,9 +102,9 @@ void GameScene::onNodeLoaded(CCNode * pNode, CCNodeLoader * pNodeLoader)
         animationManager->runAnimationsForSequenceNamed("jump");
         mDemon->setPosition(200,200);
         this->addChild(mDemon);
-    }
-    setAccelerometerEnabled(true);
+       setAccelerometerEnabled(true);
     CCDirector::sharedDirector()->getScheduler()->scheduleUpdateForTarget(this,0,false);
+    }
 }
 
 void GameScene::update(float delta)
@@ -144,8 +146,14 @@ void GameScene::update(float delta)
             
         default:
             break;
+
+            this->jump();
     }
-    
+}
+
+void GameScene::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent)
+{
+    this->jump();
 }
 
 bool GameScene::isLanding(CCNode* node)
@@ -178,7 +186,6 @@ void GameScene::gameOver()
 }
 
 void GameScene::pause(CCObject* pSender, CCControlEvent pCCControlEvent)
-
 {
     CCLog("paused!");
 }
