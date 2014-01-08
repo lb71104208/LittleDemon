@@ -14,6 +14,18 @@
 
 using namespace cocos2d;
 
+enum {
+    kTagBG,
+    KTagBoard,
+    kTagDemon
+};
+
+enum  {
+    kDemonStanding,
+    kDemonRising,
+    kDemonFalling
+};
+
 class GameScene:
 public CCLayer,
 public CCBMemberVariableAssigner,
@@ -34,13 +46,20 @@ public:
     void pause(CCObject* pSender, CCControlEvent pCCControlEvent);
     void update(float dt);
     CCNode* LoadLayer(const char * pClassName, const char* pCCBFileName);
-    
+    CCNode* getCCbi(const char* name);
+    void jump();
     CC_SYNTHESIZE(CCScene*, mScene, mScene);
+    void gameOver();
+    virtual void didAccelerate(CCAcceleration* pAccelerationValue);
+    bool isLanding(CCNode* node);
+    
 private:
     CCSprite* mBrickSprite;
     CCLabelTTF* mMyLabel;
-    CCNode* mDemonAnimation;
+    CCNode* mDemon;
     CCNode* mGameLayer;
+    uint mDemonState;
+    uint mCurrentHeight;
 };
 
 class GameSceneLayerLoader:public CCLayerLoader  {

@@ -7,10 +7,14 @@
 //
 
 #include "GameScene.h"
+#include "GameOverScene.h"
 USING_NS_CC;
 USING_NS_CC_EXT;
 
-GameScene::GameScene():mBrickSprite(NULL),mMyLabel(NULL),mDemonAnimation(NULL),mGameLayer(NULL)
+#define JUMP_HEIGHT 200
+float offsetX = 0;
+
+GameScene::GameScene():mBrickSprite(NULL),mMyLabel(NULL),mDemon(NULL),mGameLayer(NULL),mDemonState(kDemonStanding),mCurrentHeight(0)
 {
    
 }
@@ -47,6 +51,21 @@ CCNode* GameScene::LoadLayer(const char *pClassName, const char *pCCBFileName)
     return layer;
 }
 
+CCNode* GameScene::getCCbi(const char* name)
+{
+    CCNodeLoaderLibrary* library = CCNodeLoaderLibrary::newDefaultCCNodeLoaderLibrary();
+    CCBReader* ccbReafer = new CCBReader(library);
+    
+    CCNode* node = ccbReafer->readNodeGraphFromFile(name);
+    ccbReafer->autorelease();
+    if(node != NULL)
+    {
+        return node;
+    }
+    return NULL;
+    
+}
+
 SEL_MenuHandler GameScene::onResolveCCBCCMenuItemSelector(cocos2d::CCObject *pTarget, const char *pSelectorName)
 {
     CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "pause", GameScene::pause);
@@ -74,28 +93,88 @@ bool GameScene::onAssignCCBCustomProperty(cocos2d::CCObject *pTarget, const char
 void GameScene::onNodeLoaded(CCNode * pNode, CCNodeLoader * pNodeLoader)
 {
     //加载角色动画layer
-    mDemonAnimation = new CCNode(*LoadLayer("GameScene", "jump1.ccbi"));
-    if (mDemonAnimation != NULL) {
-         mDemonAnimation->setPosition(CCPoint(mBrickSprite->getPositionX(),mBrickSprite->getPositionY()+mDemonAnimation->getContentSize().height/2));
-        //CCLog("%f %f",mScene->getPositionX(),mScene->getPositionY());
-        this->addChild(mDemonAnimation);
+    mDemon = this->getCCbi("jump1.ccbi");
+    if(mDemon != NULL)
+    {
+        CCBAnimationManager* animationManager = (CCBAnimationManager*)mDemon->getUserObject();
+        animationManager->runAnimationsForSequenceNamed("jump");
+        mDemon->setPosition(200,200);
+        this->addChild(mDemon);
     }
+    setAccelerometerEnabled(true);
     CCDirector::sharedDirector()->getScheduler()->scheduleUpdateForTarget(this,0,false);
 }
 
 void GameScene::update(float delta)
 {
     if (mBrickSprite!=NULL) {
-        mBrickSprite->setPosition(CCPoint(mBrickSprite->getPosition().x,mBrickSprite->getPosition().y-1));
+        //mBrickSprite->setPosition(CCPoint(mBrickSprite->getPosition().x,mBrickSprite->getPosition().y-1));
     }
     
-    if (mDemonAnimation != NULL) {
-        mDemonAnimation->setPosition(CCPoint(mBrickSprite->getPositionX(),mBrickSprite->getPositionY()+mDemonAnimation->getContentSize().height/2));
-        //CCLog("%f %f",mScene->getPositionX(),mScene->getPositionY());
-        //this->addChild(mDemonAnimation);
+    switch (mDemonState) {
+        case kDemonStanding:
+            this->jump();
+            break;
+            
+        case kDemonRising:
+        {
+            if (mCurrentHeight < JUMP_HEIGHT) {
+                mDemon->setPosition(CCPoint(mDemon->getPositionX()+offsetX,mDemon->getPositionY()+5));
+                mCurrentHeight+=5;
+            }
+            else{
+                mDemonState = kDemonFalling;
+            }
+            break;
+        }
+            
+        case kDemonFalling:
+        {
+            if (mDemon->getPositionY()<=0) {
+                this->gameOver();
+            }
+            else if(isLanding(mDemon)==true)
+            {
+                mDemonState = kDemonStanding;
+                mCurrentHeight = 0;
+            }
+            mDemon->setPosition(CCPoint(mDemon->getPositionX()+offsetX,mDemon->getPositionY()-5));
+            break;
+        }
+            
+        default:
+            break;
     }
+    
+}
 
-    
+bool GameScene::isLanding(CCNode* node)
+{
+    if (mDemon->getPositionY()<=mBrickSprite->getPositionY()+30) {
+        CCLog("%f, %f, %f",mDemon->getPositionX(),mBrickSprite->getPositionX()-mBrickSprite->getContentSize().width/2,mBrickSprite->getPositionX()+mBrickSprite->getContentSize().width/2);
+        if (mDemon->getPositionX()>= mBrickSprite->getPositionX()-mBrickSprite->getContentSize().width/2
+            &&mDemon->getPositionX()<= mBrickSprite->getPositionX()+mBrickSprite->getContentSize().width/2) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void GameScene::didAccelerate(cocos2d::CCAcceleration *pAccelerationValue)
+{
+    offsetX = pAccelerationValue->x*10.0f;
+    //mDemon->setPositionX(mDemon->getPositionX()+pAccelerationValue->x*20.0f);
+}
+
+void GameScene::jump()
+{
+    mCurrentHeight = 0;
+    mDemonState = kDemonRising;
+}
+
+void GameScene::gameOver()
+{
+    CCDirector::sharedDirector()->replaceScene(GameOverScene::scene());
 }
 
 void GameScene::pause(CCObject* pSender, CCControlEvent pCCControlEvent)
