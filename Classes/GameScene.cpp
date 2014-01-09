@@ -8,11 +8,16 @@
 
 #include "GameScene.h"
 #include "GameOverScene.h"
+
 USING_NS_CC;
 USING_NS_CC_EXT;
 
 #define JUMP_HEIGHT 200
+#define GRAVITY 3
+
 float offsetX = 0;
+float speedX = 0;
+float speedY = 0;
 
 GameScene::GameScene():mBrickSprite(NULL),mMyLabel(NULL),mDemon(NULL),mGameLayer(NULL),mReader(NULL),mDemonState(kDemonStanding),mCurrentHeight(0)
 {
@@ -56,10 +61,10 @@ CCNode* GameScene::LoadLayer(const char *pClassName, const char *pCCBFileName)
 CCNode* GameScene::getCCbi(const char* name)
 {
     CCNodeLoaderLibrary* library = CCNodeLoaderLibrary::newDefaultCCNodeLoaderLibrary();
-    CCBReader* ccbReafer = new CCBReader(library);
+    CCBReader* ccbReader = new CCBReader(library);
     
-    CCNode* node = ccbReafer->readNodeGraphFromFile(name);
-    ccbReafer->autorelease();
+    CCNode* node = ccbReader->readNodeGraphFromFile(name);
+    ccbReader->autorelease();
     if(node != NULL)
     {
         return node;
@@ -101,6 +106,8 @@ void GameScene::onNodeLoaded(CCNode * pNode, CCNodeLoader * pNodeLoader)
         CCBAnimationManager* animationManager = (CCBAnimationManager*)mDemon->getUserObject();
         animationManager->runAnimationsForSequenceNamed("jump");
         mDemon->setPosition(200,200);
+        speedX = 0;
+        speedY = 0;
         this->addChild(mDemon);
        setAccelerometerEnabled(true);
     CCDirector::sharedDirector()->getScheduler()->scheduleUpdateForTarget(this,0,false);
@@ -121,12 +128,14 @@ void GameScene::update(float delta)
         case kDemonRising:
         {
             if (mCurrentHeight < JUMP_HEIGHT) {
-                mDemon->setPosition(CCPoint(mDemon->getPositionX()+offsetX,mDemon->getPositionY()+5));
-                mCurrentHeight+=5;
+                mDemon->setPosition(CCPoint(mDemon->getPositionX()+offsetX,mDemon->getPositionY()+speedY));
+                mCurrentHeight+=speedY;
             }
             else{
                 mDemonState = kDemonFalling;
             }
+            
+            speedY-=GRAVITY;
             break;
         }
             
@@ -140,14 +149,14 @@ void GameScene::update(float delta)
                 mDemonState = kDemonStanding;
                 mCurrentHeight = 0;
             }
-            mDemon->setPosition(CCPoint(mDemon->getPositionX()+offsetX,mDemon->getPositionY()-5));
+            mDemon->setPosition(CCPoint(mDemon->getPositionX()+offsetX,mDemon->getPositionY()+speedY));
+            speedY-=GRAVITY;
             break;
         }
             
         default:
             break;
-
-            this->jump();
+    
     }
 }
 
@@ -177,6 +186,10 @@ void GameScene::didAccelerate(cocos2d::CCAcceleration *pAccelerationValue)
 void GameScene::jump()
 {
     mCurrentHeight = 0;
+    if (mDemon!=NULL) {
+        speedY = 50.0f;
+    }
+   
     mDemonState = kDemonRising;
 }
 

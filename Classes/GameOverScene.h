@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "MainScene.h"
+
 class GameOverScene:public MainScene{
     
 public:
