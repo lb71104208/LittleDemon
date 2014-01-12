@@ -15,7 +15,7 @@
 	<key>guides</key>
 	<array/>
 	<key>jsControlled</key>
-	<true/>
+	<false/>
 	<key>nodeGraph</key>
 	<dict>
 		<key>baseClass</key>
@@ -257,7 +257,7 @@
 	<array>
 		<dict>
 			<key>autoPlay</key>
-			<true/>
+			<false/>
 			<key>callbackChannel</key>
 			<dict>
 				<key>keyframes</key>
@@ -266,11 +266,11 @@
 				<integer>10</integer>
 			</dict>
 			<key>chainedSequenceId</key>
-			<integer>-1</integer>
+			<integer>0</integer>
 			<key>length</key>
 			<real>0.20000000298023224</real>
 			<key>name</key>
-			<string>Default Timeline</string>
+			<string>down</string>
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>

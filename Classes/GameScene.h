@@ -23,14 +23,22 @@ enum {
 enum  {
     kDemonStanding,
     kDemonRising,
-    kDemonFalling
+    kDemonFalling,
+    kDemonDowning
 };
+
+enum  {
+    kBoardNormal,
+    kBoardPower,
+    kBoardMorePower
+    };
 
 class GameScene:
 public CCLayer,
 public CCBMemberVariableAssigner,
 public CCNodeLoaderListener ,
-public CCBSelectorResolver
+public CCBSelectorResolver,
+public CCBAnimationManagerDelegate
 {
     
 public:
@@ -42,9 +50,10 @@ public:
     virtual bool onAssignCCBCustomProperty(CCObject* pTarget, const char* pMemberVariableName, CCBValue* pCCBValue);
      virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject* pTarget, const char *pSelectorName);
     virtual SEL_CCControlHandler onResolveCCBCCControlSelector(cocos2d::CCObject * pTarget, const char* pSelectorName);
+    virtual void completedAnimationSequenceNamed(const char *name);
     //节点加载
     virtual void onNodeLoaded(CCNode * pNode, CCNodeLoader * pNodeLoader);
-    
+
     virtual void ccTouchesBegan(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
     
     void pause(CCObject* pSender, CCControlEvent pCCControlEvent);
@@ -53,20 +62,35 @@ public:
 
     CCNode* getCCbi(const char* name);
     void jump();
-
+    CC_SYNTHESIZE(CCSize, _screenSize, ScreenSize) ;
     CC_SYNTHESIZE(CCScene*, mScene, mScene);
     void gameOver();
     virtual void didAccelerate(CCAcceleration* pAccelerationValue);
     bool isLanding(CCNode* node);
+    bool isMissing(CCNode* node);
     
 private:
-    CCSprite* mBrickSprite;
+    CCArray* mBoardsArray;
+    void ScrollBack(int delta);
     CCLabelTTF* mMyLabel;
-    CCNode* mDemon;
+    CCLabelTTF* mMyLabelHigh;
+    CCNode* mDemonJump;
+    CCNode* mDemonRise;
+    CCNode* mDemonFall;
+    CCNode* mDemonDown;
     CCNode* mGameLayer;
+    CCSpriteFrameCache* mFrameCache;
+    CCSprite* mBg1;
+    CCSprite* mBg2;
+    uint mHeightCurrent;
+    uint mHeightRearch;
     uint mDemonState;
-    uint mCurrentHeight;
+    uint mScore;
     CCBReader* mReader;
+    CCBAnimationManager* mAManager1;
+    CCBAnimationManager* mAManager2;
+    CCBAnimationManager* mAManager3;
+    CCBAnimationManager* mAManager4;
 };
 
 class GameSceneLayerLoader:public CCLayerLoader  {

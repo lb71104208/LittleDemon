@@ -15,7 +15,7 @@
 	<key>guides</key>
 	<array/>
 	<key>jsControlled</key>
-	<true/>
+	<false/>
 	<key>nodeGraph</key>
 	<dict>
 		<key>baseClass</key>
@@ -270,7 +270,7 @@
 			<key>length</key>
 			<real>0.20000000298023224</real>
 			<key>name</key>
-			<string>Default Timeline</string>
+			<string>jump</string>
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
