@@ -2,4 +2,66 @@
 <Bucket
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../classes/GameScene.cpp"
+            timestampString = "411018073.334857"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+            landmarkName = "GameScene::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GameScene::ccTouchesBegan(cocos2d::CCSet*, cocos2d::CCEvent*)"
+                  moduleName = "LittleDemon"
+                  urlString = "file://localhost/Users/lb71104208/Documents/cocos2d-x-2.2.1/projects/LittleDemon/classes/GameScene.cpp"
+                  timestampString = "411018075.198106"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "165"
+                  endingLineNumber = "165"
+                  offsetFromSymbolStart = "51">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "non-virtual thunk to GameScene::ccTouchesBegan(cocos2d::CCSet*, cocos2d::CCEvent*)"
+                  moduleName = "LittleDemon"
+                  urlString = "file://localhost/Users/lb71104208/Documents/cocos2d-x-2.2.1/projects/LittleDemon/classes/GameScene.cpp"
+                  timestampString = "411018075.198908"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "187"
+                  endingLineNumber = "187"
+                  offsetFromSymbolStart = "6">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "non-virtual thunk to GameScene::ccTouchesBegan(cocos2d::CCSet*, cocos2d::CCEvent*)"
+                  moduleName = "LittleDemon"
+                  urlString = "file://localhost/Users/lb71104208/Documents/cocos2d-x-2.2.1/projects/LittleDemon/classes/GameScene.cpp"
+                  timestampString = "411018075.199619"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "165"
+                  endingLineNumber = "165"
+                  offsetFromSymbolStart = "42">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

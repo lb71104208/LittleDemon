@@ -22,8 +22,10 @@ enum {
 
 enum  {
     kDemonStanding,
+    kDemonJumping,
     kDemonRising,
-    kDemonFalling
+    kDemonFalling,
+    kDemonLanding
 };
 
 class GameScene:
@@ -62,7 +64,7 @@ public:
 private:
     CCSprite* mBrickSprite;
     CCLabelTTF* mMyLabel;
-    CCNode* mDemon;
+    CCNode* mJump;
     CCNode* mGameLayer;
     uint mDemonState;
     uint mCurrentHeight;

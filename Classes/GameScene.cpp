@@ -19,9 +19,9 @@ float offsetX = 0;
 float speedX = 0;
 float speedY = 0;
 
-GameScene::GameScene():mBrickSprite(NULL),mMyLabel(NULL),mDemon(NULL),mGameLayer(NULL),mReader(NULL),mDemonState(kDemonStanding),mCurrentHeight(0)
+GameScene::GameScene():mBrickSprite(NULL),mMyLabel(NULL),mJump(NULL),mGameLayer(NULL),mReader(NULL),mDemonState(kDemonStanding),mCurrentHeight(0)
 {
-   setTouchEnabled( true );
+    
 }
 
 GameScene::~GameScene()
@@ -100,16 +100,17 @@ bool GameScene::onAssignCCBCustomProperty(cocos2d::CCObject *pTarget, const char
 void GameScene::onNodeLoaded(CCNode * pNode, CCNodeLoader * pNodeLoader)
 {
     //加载角色动画layer
-    mDemon = this->getCCbi("jump1.ccbi");
-    if(mDemon != NULL)
+    mJump = this->getCCbi("1-1.ccbi");
+    if(mJump != NULL)
     {
-        CCBAnimationManager* animationManager = (CCBAnimationManager*)mDemon->getUserObject();
-        animationManager->runAnimationsForSequenceNamed("jump");
-        mDemon->setPosition(200,200);
+        CCBAnimationManager* animationManager = (CCBAnimationManager*)mJump->getUserObject();
+        animationManager->runAnimationsForSequenceNamed("Default Timeline");
+        mJump->setPosition(200,200);
         speedX = 0;
         speedY = 0;
-        this->addChild(mDemon);
+        this->addChild(mJump);
        setAccelerometerEnabled(true);
+        setTouchEnabled( true );
     CCDirector::sharedDirector()->getScheduler()->scheduleUpdateForTarget(this,0,false);
     }
 }
@@ -122,13 +123,12 @@ void GameScene::update(float delta)
     
     switch (mDemonState) {
         case kDemonStanding:
-            this->jump();
             break;
             
         case kDemonRising:
         {
             if (mCurrentHeight < JUMP_HEIGHT) {
-                mDemon->setPosition(CCPoint(mDemon->getPositionX()+offsetX,mDemon->getPositionY()+speedY));
+                mJump->setPosition(CCPoint(mJump->getPositionX()+offsetX,mJump->getPositionY()+speedY));
                 mCurrentHeight+=speedY;
             }
             else{
@@ -141,15 +141,15 @@ void GameScene::update(float delta)
             
         case kDemonFalling:
         {
-            if (mDemon->getPositionY()<=0) {
+            if (mJump->getPositionY()<=0) {
                 this->gameOver();
             }
-            else if(isLanding(mDemon)==true)
+            else if(isLanding(mJump)==true)
             {
                 mDemonState = kDemonStanding;
                 mCurrentHeight = 0;
             }
-            mDemon->setPosition(CCPoint(mDemon->getPositionX()+offsetX,mDemon->getPositionY()+speedY));
+            mJump->setPosition(CCPoint(mJump->getPositionX()+offsetX,mJump->getPositionY()+speedY));
             speedY-=GRAVITY;
             break;
         }
@@ -167,10 +167,10 @@ void GameScene::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEven
 
 bool GameScene::isLanding(CCNode* node)
 {
-    if (mDemon->getPositionY()<=mBrickSprite->getPositionY()+30) {
-        CCLog("%f, %f, %f",mDemon->getPositionX(),mBrickSprite->getPositionX()-mBrickSprite->getContentSize().width/2,mBrickSprite->getPositionX()+mBrickSprite->getContentSize().width/2);
-        if (mDemon->getPositionX()>= mBrickSprite->getPositionX()-mBrickSprite->getContentSize().width/2
-            &&mDemon->getPositionX()<= mBrickSprite->getPositionX()+mBrickSprite->getContentSize().width/2) {
+    if (mJump->getPositionY()<=mBrickSprite->getPositionY()+30) {
+        CCLog("%f, %f, %f",mJump->getPositionX(),mBrickSprite->getPositionX()-mBrickSprite->getContentSize().width/2,mBrickSprite->getPositionX()+mBrickSprite->getContentSize().width/2);
+        if (mJump->getPositionX()>= mBrickSprite->getPositionX()-mBrickSprite->getContentSize().width/2
+            &&mJump->getPositionX()<= mBrickSprite->getPositionX()+mBrickSprite->getContentSize().width/2) {
             return true;
         }
     }
@@ -186,7 +186,7 @@ void GameScene::didAccelerate(cocos2d::CCAcceleration *pAccelerationValue)
 void GameScene::jump()
 {
     mCurrentHeight = 0;
-    if (mDemon!=NULL) {
+    if (mJump!=NULL) {
         speedY = 50.0f;
     }
    
